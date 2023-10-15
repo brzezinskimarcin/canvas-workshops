@@ -1,4 +1,5 @@
 import Sprite from '@/entities/helpers/sprite';
+import Text from '@/entities/helpers/text';
 import Enemy from '@/entities/enemy';
 import type { MapConfig } from '@/game/map';
 import type Map from '@/game/map';
@@ -9,6 +10,7 @@ import enemyFoot from '@/assets/enemy-foot.png';
 import enemyEyesOpen from '@/assets/enemy-eyes-open.png';
 import eyesClosed from '@/assets/eyes-closed.png';
 import gun from '@/assets/gun.png';
+import enemy from '@/assets/enemy.png';
 
 interface EnemiesConstructor {
   ctx: CanvasRenderingContext2D;
@@ -16,6 +18,7 @@ interface EnemiesConstructor {
   projectiles: Projectiles;
   deathParticlesSet: DeathParticlesSet;
   config: MapConfig;
+  onDestroyedAllEnemies: () => void;
 }
 
 export default class Enemies {
@@ -24,8 +27,11 @@ export default class Enemies {
   projectiles: Projectiles;
   bodyParts: Record<string, Sprite>;
   enemies: Enemy[];
+  enemySprite: Sprite;
+  text: Text;
+  onDestroyedAllEnemies: () => void;
 
-  constructor({ ctx, map, projectiles, deathParticlesSet, config }: EnemiesConstructor) {
+  constructor({ ctx, map, projectiles, deathParticlesSet, config, onDestroyedAllEnemies }: EnemiesConstructor) {
     this.ctx = ctx;
     this.map = map;
     this.projectiles = projectiles;
@@ -36,6 +42,9 @@ export default class Enemies {
       eyesClosed: new Sprite({ ctx, url: eyesClosed }),
       gun: new Sprite({ ctx, url: gun }),
     };
+    this.onDestroyedAllEnemies = onDestroyedAllEnemies;
+    this.enemySprite = new Sprite({ ctx, url: enemy });
+    this.text = new Text({ ctx });
     this.enemies = config.enemies.map(({ x, y }) => new Enemy({
       ctx: this.ctx,
       controls: {
@@ -49,7 +58,7 @@ export default class Enemies {
       x: x * 64,
       y: y * 64,
       onRemove: (item) => {
-        this.enemies.splice(this.enemies.indexOf(item));
+        this.enemies.splice(this.enemies.indexOf(item as Enemy));
 
         deathParticlesSet.addDeathParticles({
           color: 'rgb(67, 176, 42)',
@@ -61,10 +70,26 @@ export default class Enemies {
   }
 
   update() {
-    this.enemies.forEach(enemy => enemy.update());
+    if (this.enemies.length) {
+      this.enemies.forEach(enemy => enemy.update());
+    } else {
+      this.onDestroyedAllEnemies();
+    }
   }
 
   draw() {
     this.enemies.forEach(enemy => enemy.draw());
+
+    const textWidth = this.text.draw({
+      content: `x${this.enemies.length}`,
+      fontSize: 36,
+      x: textWidth => this.ctx.canvas.width - textWidth - 32,
+      y: 48,
+    });
+
+    this.enemySprite.draw({
+      destinationX: this.ctx.canvas.width - textWidth - 32 - this.enemySprite.width - 12,
+      destinationY: this.enemySprite.height / 2 - 9,
+    });
   }
 }

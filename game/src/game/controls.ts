@@ -13,47 +13,23 @@ export default class Controls {
   keyJump = false;
   shoot = false;
   jumps = 0;
+  mouseMoveEventListenerBound = this.mouseMoveEventListener.bind(this);
+  keyDownEventListenerBound = this.keyDownEventListener.bind(this);
+  keyUpEventListenerBound = this.keyUpEventListener.bind(this);
+  clickEventListenerBound = this.clickEventListener.bind(this);
 
   constructor() {
-    window.addEventListener('mousemove', (event) => {
-      this.mouseX = event.x;
-      this.mouseY = event.y;
-    });
+    window.addEventListener('mousemove', this.mouseMoveEventListenerBound);
+    window.addEventListener('keydown', this.keyDownEventListenerBound);
+    window.addEventListener('keyup', this.keyUpEventListenerBound);
+    window.addEventListener('click', this.clickEventListenerBound);
+  }
 
-    window.addEventListener('keydown', ({ code: keyCode }) => {
-      switch (keyCode) {
-        case 'KeyA':
-          this.keyLeft = true;
-          break;
-
-        case 'KeyD':
-          this.keyRight = true;
-          break;
-
-        case 'Space':
-          if (this.jumps < this.#MAX_JUMPS) {
-            this.keyJump = true;
-            this.jumps++;
-          }
-          break;
-      }
-    });
-
-    window.addEventListener('keyup', ({ code: keyCode }) => {
-      switch (keyCode) {
-        case 'KeyA':
-          this.keyLeft = false;
-          break;
-
-        case 'KeyD':
-          this.keyRight = false;
-          break;
-      }
-    });
-
-    window.addEventListener('click', () => {
-      this.shoot = true;
-    });
+  cleanup() {
+    window.removeEventListener('mousemove', this.mouseMoveEventListenerBound);
+    window.removeEventListener('keydown', this.keyDownEventListenerBound);
+    window.removeEventListener('keyup', this.keyUpEventListenerBound);
+    window.removeEventListener('click', this.clickEventListenerBound);
   }
 
   getAngle({ x, y }: Point) {
@@ -61,5 +37,45 @@ export default class Controls {
       this.mouseY - y,
       this.mouseX - x,
     );
+  }
+
+  mouseMoveEventListener(event: MouseEvent) {
+    this.mouseX = event.x;
+    this.mouseY = event.y;
+  }
+
+  keyDownEventListener({ code: keyCode }: KeyboardEvent) {
+    switch (keyCode) {
+      case 'KeyA':
+        this.keyLeft = true;
+        break;
+
+      case 'KeyD':
+        this.keyRight = true;
+        break;
+
+      case 'Space':
+        if (this.jumps < this.#MAX_JUMPS) {
+          this.keyJump = true;
+          this.jumps++;
+        }
+        break;
+    }
+  }
+
+  keyUpEventListener({ code: keyCode }: KeyboardEvent) {
+    switch (keyCode) {
+      case 'KeyA':
+        this.keyLeft = false;
+        break;
+
+      case 'KeyD':
+        this.keyRight = false;
+        break;
+    }
+  }
+
+  clickEventListener() {
+    this.shoot = true;
   }
 }

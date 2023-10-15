@@ -1,4 +1,4 @@
 import Game from '@/game';
 
-const game = new Game('#game-canvas');
-game.start();
+// eslint-disable-next-line no-new
+new Game('#game-canvas');
