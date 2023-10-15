@@ -26,7 +26,7 @@ export default class Player extends Character {
       },
       onRemove: (item) => {
         args.deathParticlesSet.addDeathParticles({
-          color: 'rgb(168, 176, 179)',
+          color: 'rgb(223, 223, 223)',
           x: item.x,
           y: item.y,
         });

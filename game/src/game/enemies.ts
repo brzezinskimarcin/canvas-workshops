@@ -52,7 +52,7 @@ export default class Enemies {
         this.enemies.splice(this.enemies.indexOf(item));
 
         deathParticlesSet.addDeathParticles({
-          color: 'rgb(168, 176, 179)',
+          color: 'rgb(67, 176, 42)',
           x: item.x,
           y: item.y,
         });

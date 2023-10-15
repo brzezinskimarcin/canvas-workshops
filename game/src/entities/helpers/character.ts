@@ -32,6 +32,7 @@ export default abstract class Character {
   #WALKING_ANIMATION_FRAMES = 15;
   #PLAYER_WIDTH = 64;
   #GUN_DAMAGE = 25;
+  MAX_HEALTH = 100;
 
   ctx: CanvasRenderingContext2D;
   controls: Controls;
@@ -46,7 +47,7 @@ export default abstract class Character {
   centerY = 0;
   velocityX = 0;
   velocityY = 0;
-  health = 100;
+  health = this.MAX_HEALTH;
 
   walkingAnimation = -1;
   damagedAnimation = 0;
