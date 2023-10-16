@@ -18,6 +18,13 @@ interface CollidesParams {
   height: number;
 }
 
+interface IntersectsParams {
+  startX: number;
+  startY: number;
+  endX: number;
+  endY: number;
+}
+
 export type PlatformConfig = Pick<PlatformConstructor, 'tiles' | 'x' | 'y'>;
 
 export default class Platform {
@@ -84,5 +91,36 @@ export default class Platform {
     });
 
     return { collisionX, collisionY };
+  }
+
+  intersectsWith({ startX: a, startY: b, endX: c, endY: d }: IntersectsParams) {
+    return this.tiles.some((row, rowIndex) => {
+      return row.some((column, columnIndex) => {
+        if (column === 'EMPTY') {
+          return false;
+        }
+
+        const x1 = this.#TILE_WIDTH * columnIndex + this.x;
+        const y1 = this.#TILE_WIDTH * rowIndex + this.y;
+        const x2 = x1 + this.#TILE_WIDTH;
+        const y2 = y1 + this.#TILE_WIDTH;
+
+        return [
+          [x1, y1, x2, y1],
+          [x2, y1, x2, y2],
+          [x2, y2, x1, y2],
+          [x1, y2, x1, y1],
+        ].some(([p, q, r, s]) => {
+          const det = (c - a) * (s - q) - (r - p) * (d - b);
+          if (det === 0) {
+            return false;
+          } else {
+            const lambda = ((s - q) * (r - a) + (p - r) * (s - b)) / det;
+            const gamma = ((b - d) * (r - a) + (c - a) * (s - b)) / det;
+            return (lambda > -0.01 && lambda < 1.01) && (gamma > -0.01 && gamma < 1.01);
+          }
+        });
+      });
+    });
   }
 }

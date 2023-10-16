@@ -5,6 +5,7 @@ import type { MapConfig } from '@/game/map';
 import type Map from '@/game/map';
 import type DeathParticlesSet from '@/game/death-particles-set';
 import type Projectiles from '@/game/projectiles';
+import type Player from '@/entities/player';
 import enemyBody from '@/assets/enemy-body.png';
 import enemyFoot from '@/assets/enemy-foot.png';
 import enemyEyesOpen from '@/assets/enemy-eyes-open.png';
@@ -18,6 +19,7 @@ interface EnemiesConstructor {
   projectiles: Projectiles;
   deathParticlesSet: DeathParticlesSet;
   config: MapConfig;
+  player: Player;
   onDestroyedAllEnemies: () => void;
 }
 
@@ -31,7 +33,7 @@ export default class Enemies {
   text: Text;
   onDestroyedAllEnemies: () => void;
 
-  constructor({ ctx, map, projectiles, deathParticlesSet, config, onDestroyedAllEnemies }: EnemiesConstructor) {
+  constructor({ ctx, map, projectiles, deathParticlesSet, config, player, onDestroyedAllEnemies }: EnemiesConstructor) {
     this.ctx = ctx;
     this.map = map;
     this.projectiles = projectiles;
@@ -45,20 +47,17 @@ export default class Enemies {
     this.onDestroyedAllEnemies = onDestroyedAllEnemies;
     this.enemySprite = new Sprite({ ctx, url: enemy });
     this.text = new Text({ ctx });
-    this.enemies = config.enemies.map(({ x, y }) => new Enemy({
+    this.enemies = config.enemies.map(({ x, y, walkingPath }) => new Enemy({
       ctx: this.ctx,
-      controls: {
-        getAngle() {
-          return 0;
-        },
-      },
       bodyParts: this.bodyParts,
       map: this.map,
       projectiles: this.projectiles,
+      player,
+      walkingPath,
       x: x * 64,
-      y: y * 64,
+      y: ctx.canvas.height - y * 64,
       onRemove: (item) => {
-        this.enemies.splice(this.enemies.indexOf(item as Enemy));
+        this.enemies.splice(this.enemies.indexOf(item as Enemy), 1);
 
         deathParticlesSet.addDeathParticles({
           color: 'rgb(67, 176, 42)',

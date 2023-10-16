@@ -1,4 +1,4 @@
-import Controls from '@/game/controls';
+import PlayerControls from '@/controls/player-controls';
 import Background from '@/entities/background';
 import Map from '@/game/map';
 import DeathParticlesSet from '@/game/death-particles-set';
@@ -23,7 +23,7 @@ export default class Game {
   ctx: CanvasRenderingContext2D;
   animationRequestId!: number;
   entities!: Entity[];
-  controls?: Controls;
+  playerControls?: PlayerControls;
   text: Text;
 
   constructor(selector: string) {
@@ -37,7 +37,7 @@ export default class Game {
     document.addEventListener('keydown', ({ code: keyCode }) => {
       if (keyCode === 'KeyR') {
         window.cancelAnimationFrame(this.animationRequestId);
-        this.controls?.cleanup();
+        this.playerControls?.cleanup();
         this.initGame();
         this.start();
       }
@@ -48,14 +48,14 @@ export default class Game {
   }
 
   initGame() {
-    this.controls = new Controls();
+    this.playerControls = new PlayerControls();
     const background = new Background({ ctx: this.ctx });
     const map = new Map({ ctx: this.ctx, config: defaultMap });
     const deathParticlesSet = new DeathParticlesSet({ ctx: this.ctx });
     const projectiles = new Projectiles({ ctx: this.ctx, map });
     const player = new Player({
       ctx: this.ctx,
-      controls: this.controls,
+      controls: this.playerControls,
       map,
       projectiles,
       deathParticlesSet,
@@ -73,6 +73,7 @@ export default class Game {
       projectiles,
       deathParticlesSet,
       config: defaultMap,
+      player,
       onDestroyedAllEnemies: () => {
         this.stop();
         this.showWelcomeScreen({
@@ -81,7 +82,7 @@ export default class Game {
         });
       },
     });
-    const crosshair = new Crosshair({ ctx: this.ctx, controls: this.controls });
+    const crosshair = new Crosshair({ ctx: this.ctx, controls: this.playerControls });
     projectiles.setPlayer(player);
     projectiles.setEnemies(enemies);
 

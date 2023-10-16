@@ -1,8 +1,8 @@
-import type Controls from '@/game/controls';
+import type PlayerControls from '@/controls/player-controls';
 
 interface CrosshairConstructor {
   ctx: CanvasRenderingContext2D;
-  controls: Controls;
+  controls: PlayerControls;
 }
 
 export default class Crosshair {
@@ -16,7 +16,7 @@ export default class Crosshair {
   #ARC_OFFSET_ANGLE = Math.asin(this.#THICKNESS / (2 * (this.#CIRCLE_RADIUS - this.#THICKNESS / 2)));
 
   ctx: CanvasRenderingContext2D;
-  controls: Controls;
+  controls: PlayerControls;
 
   constructor({ ctx, controls }: CrosshairConstructor) {
     this.controls = controls;

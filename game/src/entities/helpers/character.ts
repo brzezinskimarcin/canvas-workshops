@@ -1,4 +1,4 @@
-import type Controls from '@/game/controls';
+import type { Controls } from '@/controls/controls';
 import type Map from '@/game/map';
 import type Projectiles from '@/game/projectiles';
 import type Sprite from '@/entities/helpers/sprite';

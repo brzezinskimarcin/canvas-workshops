@@ -1,9 +1,6 @@
-interface Point {
-  x: number;
-  y: number;
-}
+import type { Point } from '@/controls/controls';
 
-export default class Controls {
+export default class PlayerControls {
   #MAX_JUMPS = 2;
 
   mouseX = 0;

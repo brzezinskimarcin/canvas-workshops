@@ -16,7 +16,7 @@ export default class Player extends Character {
   #HEALTH_BAR_WIDTH = 512;
   #HEALTH_BAR_HEIGHT = 24;
   #HEALTH_BAR_RADIUS = 8;
-  #HEALTH_BAR_STROKE = 4;
+  #HEALTH_BAR_STROKE = 2;
   #HEALTH_BAR_OFFSET = 24;
 
   constructor(args: PlayerConstructor) {
