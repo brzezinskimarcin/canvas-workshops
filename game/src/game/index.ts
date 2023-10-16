@@ -34,11 +34,6 @@ export default class Game {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    this.showWelcomeScreen({
-      title: 'Canvas workshops',
-      subtitle: 'Press "R" to start the game',
-    });
-
     document.addEventListener('keydown', ({ code: keyCode }) => {
       if (keyCode === 'KeyR') {
         window.cancelAnimationFrame(this.animationRequestId);
@@ -47,6 +42,9 @@ export default class Game {
         this.start();
       }
     });
+
+    this.initGame();
+    this.start();
   }
 
   initGame() {

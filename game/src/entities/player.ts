@@ -47,7 +47,7 @@ export default class Player extends Character {
 
     this.ctx.beginPath();
     this.ctx.roundRect(
-      (this.ctx.canvas.width - this.#HEALTH_BAR_WIDTH) / 2,
+      this.#HEALTH_BAR_OFFSET,
       this.#HEALTH_BAR_OFFSET,
       this.health / this.MAX_HEALTH * this.#HEALTH_BAR_WIDTH,
       this.#HEALTH_BAR_HEIGHT,
@@ -60,7 +60,7 @@ export default class Player extends Character {
 
     this.ctx.beginPath();
     this.ctx.roundRect(
-      (this.ctx.canvas.width - this.#HEALTH_BAR_WIDTH) / 2,
+      this.#HEALTH_BAR_OFFSET,
       this.#HEALTH_BAR_OFFSET,
       this.#HEALTH_BAR_WIDTH,
       this.#HEALTH_BAR_HEIGHT,
