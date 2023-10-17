@@ -214,7 +214,9 @@ export default abstract class Character {
 
     if (this.health <= 0 || this.y - 20 >= this.ctx.canvas.height) {
       this.onRemove(this);
-    } else if (this.damagedAnimation) {
+    }
+
+    if (this.damagedAnimation) {
       this.damagedAnimation--;
       this.bodyParts.eyesClosed.draw({
         destinationX: this.centerX + offsetX - this.bodyParts.eyesClosed.width / 2,
