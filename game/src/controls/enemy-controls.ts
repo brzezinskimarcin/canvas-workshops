@@ -58,7 +58,7 @@ export default class EnemyControls {
   updateShoot() {
     if (!this.checkIntersection() && !this.shootTimeout) {
       this.shoot = true;
-      this.shootTimeout = 30;
+      this.shootTimeout = 60;
     }
 
     this.shootTimeout = Math.max(0, this.shootTimeout - 1);

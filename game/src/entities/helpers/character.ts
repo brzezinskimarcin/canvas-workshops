@@ -24,9 +24,9 @@ interface CollidesParams {
 }
 
 export default abstract class Character {
-  #GRAVITY = 0.5;
-  #CHARACTER_VELOCITY = 8;
-  #JUMP_VELOCITY = 12.5;
+  #GRAVITY = 0.15;
+  #CHARACTER_VELOCITY = 4;
+  #JUMP_VELOCITY = 6.5;
   #FEET_OFFSET = 10;
   #EYES_OFFSET = 4;
   #WALKING_ANIMATION_FRAMES = 15;
