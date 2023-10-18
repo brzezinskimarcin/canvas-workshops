@@ -169,6 +169,10 @@ export default abstract class Character {
 
     this.interpretControls();
     this.detectCollision();
+
+    if (this.health <= 0 || this.y - 20 >= this.ctx.canvas.height) {
+      this.onRemove(this);
+    }
   }
 
   animateWalking(framesDelayed: number, callback: () => void) {
@@ -211,10 +215,6 @@ export default abstract class Character {
 
     const offsetX = this.#EYES_OFFSET * Math.sin(Math.PI / 2 - this.angle);
     const offsetY = this.#EYES_OFFSET * Math.cos(Math.PI / 2 - this.angle);
-
-    if (this.health <= 0 || this.y - 20 >= this.ctx.canvas.height) {
-      this.onRemove(this);
-    }
 
     if (this.damagedAnimation) {
       this.damagedAnimation--;
