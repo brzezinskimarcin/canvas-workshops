@@ -20,6 +20,11 @@ interface ShowWelcomeScreenArgs {
 }
 
 export default class Game {
+  #TITLE_FONT_SIZE = 60;
+  #TITLE_OFFSET = -48;
+  #SUBTITLE_FONT_SIZE = 36;
+  #SUBTITLE_OFFSET = 16;
+
   ctx: CanvasRenderingContext2D;
   animationRequestId!: number;
   entities!: Entity[];
@@ -123,16 +128,16 @@ export default class Game {
 
       this.text.draw({
         content: title,
-        fontSize: 60,
+        fontSize: this.#TITLE_FONT_SIZE,
         x: textWidth => (this.ctx.canvas.width - textWidth) / 2,
-        y: this.ctx.canvas.height / 2 - 48,
+        y: this.ctx.canvas.height / 2 + this.#TITLE_OFFSET,
       });
 
       this.text.draw({
         content: subtitle,
-        fontSize: 36,
+        fontSize: this.#SUBTITLE_FONT_SIZE,
         x: textWidth => (this.ctx.canvas.width - textWidth) / 2,
-        y: this.ctx.canvas.height / 2 + 16,
+        y: this.ctx.canvas.height / 2 + this.#SUBTITLE_OFFSET,
       });
     });
   }

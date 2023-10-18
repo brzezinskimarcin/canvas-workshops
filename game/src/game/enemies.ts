@@ -24,6 +24,10 @@ interface EnemiesConstructor {
 }
 
 export default class Enemies {
+  #FONT_SIZE = 36;
+  #OFFSET_X = 24;
+  #OFFSET_Y = 12;
+
   ctx: CanvasRenderingContext2D;
   map: Map;
   projectiles: Projectiles;
@@ -81,14 +85,14 @@ export default class Enemies {
 
     const textWidth = this.text.draw({
       content: `x${this.enemies.length}`,
-      fontSize: 36,
-      x: textWidth => this.ctx.canvas.width - textWidth - 32,
-      y: 48,
+      fontSize: this.#FONT_SIZE,
+      x: textWidth => this.ctx.canvas.width - textWidth - this.#OFFSET_X,
+      y: this.#FONT_SIZE + this.#OFFSET_Y,
     });
 
     this.enemySprite.draw({
-      destinationX: this.ctx.canvas.width - textWidth - 32 - this.enemySprite.width - 12,
-      destinationY: this.enemySprite.height / 2 - 9,
+      destinationX: this.ctx.canvas.width - textWidth - 3 / 2 * this.#OFFSET_X - this.enemySprite.width,
+      destinationY: this.#OFFSET_Y,
     });
   }
 }

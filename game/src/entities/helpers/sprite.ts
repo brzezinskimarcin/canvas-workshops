@@ -27,20 +27,22 @@ interface RotateArgs {
 
 export default class Sprite {
   ctx: CanvasRenderingContext2D;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
+  x!: number;
+  y!: number;
+  width!: number;
+  height!: number;
   image: HTMLImageElement;
 
   constructor({ ctx, x, y, width, height, url }: SpriteConstructor) {
     this.image = new Image();
     this.image.src = url;
     this.ctx = ctx;
-    this.width = width || this.image.width;
-    this.height = height || this.image.height;
-    this.x = typeof x === 'function' ? x(this.width) : (x || 0);
-    this.y = typeof y === 'function' ? y(this.height) : (y || 0);
+    this.image.onload = () => {
+      this.width = width || this.image.width;
+      this.height = height || this.image.height;
+      this.x = typeof x === 'function' ? x(this.width) : (x || 0);
+      this.y = typeof y === 'function' ? y(this.height) : (y || 0);
+    };
   }
 
   draw({ sourceX, sourceY, sourceWidth, sourceHeight, destinationX, destinationY, destinationWidth, destinationHeight }: DrawArgs = {}) {
