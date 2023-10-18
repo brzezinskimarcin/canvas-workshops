@@ -25,7 +25,7 @@ export default class Game {
   #SUBTITLE_FONT_SIZE = 36;
   #SUBTITLE_OFFSET = 16;
 
-  ctx: CanvasRenderingContext2D;
+  ctx!: CanvasRenderingContext2D;
   animationRequestId!: number;
   entities!: Entity[];
   playerControls?: PlayerControls;
@@ -107,23 +107,6 @@ export default class Game {
   }
 
   showWelcomeScreen({ title, subtitle }: ShowWelcomeScreenArgs) {
-    window.requestAnimationFrame(() => {
-      this.ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
-      this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-
-      this.text.draw({
-        content: title,
-        fontSize: this.#TITLE_FONT_SIZE,
-        x: textWidth => (this.ctx.canvas.width - textWidth) / 2,
-        y: this.ctx.canvas.height / 2 + this.#TITLE_OFFSET,
-      });
-
-      this.text.draw({
-        content: subtitle,
-        fontSize: this.#SUBTITLE_FONT_SIZE,
-        x: textWidth => (this.ctx.canvas.width - textWidth) / 2,
-        y: this.ctx.canvas.height / 2 + this.#SUBTITLE_OFFSET,
-      });
-    });
+    // @TODO:
   }
 }
