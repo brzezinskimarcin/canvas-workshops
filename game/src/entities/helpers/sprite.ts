@@ -44,31 +44,10 @@ export default class Sprite {
   }
 
   draw({ sourceX, sourceY, sourceWidth, sourceHeight, destinationX, destinationY, destinationWidth, destinationHeight }: DrawArgs = {}) {
-    this.ctx.drawImage(
-      this.image,
-      sourceX || 0,
-      sourceY || 0,
-      sourceWidth || this.image.width,
-      sourceHeight || this.image.height,
-      destinationX || this.x,
-      destinationY || this.y,
-      destinationWidth || this.width,
-      destinationHeight || this.height,
-    );
+    // @TODO:
   }
 
   rotate({ angle, x, y, callback }: RotateArgs) {
-    this.ctx.translate(x, y);
-    if (Math.abs(angle) >= Math.PI / 2) {
-      this.ctx.scale(-1, 1);
-      this.ctx.rotate(Math.PI - angle);
-    } else {
-      this.ctx.rotate(angle);
-    }
-    this.ctx.translate(-x, -y);
-
-    callback();
-
-    this.ctx.resetTransform();
+    // @TODO:
   }
 }

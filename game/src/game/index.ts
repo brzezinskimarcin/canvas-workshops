@@ -20,19 +20,15 @@ interface ShowWelcomeScreenArgs {
 }
 
 export default class Game {
-  ctx: CanvasRenderingContext2D;
+  ctx!: CanvasRenderingContext2D;
   animationRequestId!: number;
   entities!: Entity[];
   playerControls?: PlayerControls;
   text: Text;
 
   constructor(selector: string) {
-    const canvas = document.querySelector<HTMLCanvasElement>(selector)!;
-    this.ctx = canvas.getContext('2d')!;
+    // @TODO:
     this.text = new Text({ ctx: this.ctx });
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
 
     document.addEventListener('keydown', ({ code: keyCode }) => {
       if (keyCode === 'KeyR') {
@@ -98,22 +94,11 @@ export default class Game {
   }
 
   start() {
-    this.animationRequestId = window.requestAnimationFrame(this.start.bind(this));
-    this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-
-    this.entities.forEach((entity) => {
-      if (entity.update) {
-        entity.update();
-      }
-    });
-
-    this.entities.forEach((entity) => {
-      entity.draw();
-    });
+    // @TODO:
   }
 
   stop() {
-    window.cancelAnimationFrame(this.animationRequestId);
+    // @TODO:
   }
 
   showWelcomeScreen({ title, subtitle }: ShowWelcomeScreenArgs) {

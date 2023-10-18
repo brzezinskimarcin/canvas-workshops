@@ -48,16 +48,10 @@ export default class Background {
   }
 
   draw() {
-    this.drawGradient();
-    this.clouds.forEach(cloud => cloud.draw());
+    // @TODO:
   }
 
   drawGradient() {
-    const gradient = this.ctx.createLinearGradient(0, 0, 0, this.ctx.canvas.height);
-    gradient.addColorStop(0, this.#BG_START);
-    gradient.addColorStop(1, this.#BG_END);
-
-    this.ctx.fillStyle = gradient;
-    this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+    // @TODO:
   }
 }

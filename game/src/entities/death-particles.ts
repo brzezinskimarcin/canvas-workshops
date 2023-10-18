@@ -51,12 +51,6 @@ export default class DeathParticles {
   }
 
   draw() {
-    this.deathParticles.forEach((particle) => {
-      this.ctx.beginPath();
-      this.ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-      this.ctx.fillStyle = particle.color;
-      this.ctx.fill();
-      this.ctx.closePath();
-    });
+    // @TODO:
   }
 }

@@ -46,21 +46,7 @@ export default class Platform {
   }
 
   draw() {
-    this.tiles.forEach((row, rowIndex) => {
-      row.forEach((column, columnIndex) => {
-        const [spriteX, spriteY] = PLATFORM_TILE_MAPPING[column];
-        this.platformTileset.draw({
-          sourceX: spriteX * this.#TILE_WIDTH,
-          sourceY: spriteY * this.#TILE_WIDTH,
-          sourceWidth: this.#TILE_WIDTH,
-          sourceHeight: this.#TILE_WIDTH,
-          destinationX: this.#TILE_WIDTH * columnIndex + this.x,
-          destinationY: this.#TILE_WIDTH * rowIndex + this.y,
-          destinationWidth: this.#TILE_WIDTH,
-          destinationHeight: this.#TILE_WIDTH,
-        });
-      });
-    });
+    // @TODO:
   }
 
   collidesWith({ x, y, velocityX, velocityY, width, height }: CollidesParams) {

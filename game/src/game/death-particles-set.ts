@@ -23,7 +23,7 @@ export default class DeathParticlesSet {
   }
 
   draw() {
-    this.deathParticles.forEach(deathParticle => deathParticle.draw());
+    // @TODO:
   }
 
   addDeathParticles({ color, x, y }: AddDeathParticles) {

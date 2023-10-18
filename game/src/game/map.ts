@@ -36,10 +36,7 @@ export default class Map {
     }));
   }
 
-  update() {
-  }
-
   draw() {
-    this.platforms.forEach(platform => platform.draw());
+    // @TODO:
   }
 }

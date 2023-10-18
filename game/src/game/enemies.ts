@@ -77,18 +77,6 @@ export default class Enemies {
   }
 
   draw() {
-    this.enemies.forEach(enemy => enemy.draw());
-
-    const textWidth = this.text.draw({
-      content: `x${this.enemies.length}`,
-      fontSize: 36,
-      x: textWidth => this.ctx.canvas.width - textWidth - 32,
-      y: 48,
-    });
-
-    this.enemySprite.draw({
-      destinationX: this.ctx.canvas.width - textWidth - 32 - this.enemySprite.width - 12,
-      destinationY: this.enemySprite.height / 2 - 9,
-    });
+    // @TODO:
   }
 }

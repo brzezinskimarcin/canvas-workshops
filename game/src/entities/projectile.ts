@@ -85,16 +85,6 @@ export default class Projectile {
   }
 
   draw() {
-    this.bullet.rotate({
-      angle: this.angle,
-      x: this.x,
-      y: this.y,
-      callback: () => {
-        this.bullet.draw({
-          destinationX: this.x,
-          destinationY: this.y,
-        });
-      },
-    });
+    // @TODO:
   }
 }

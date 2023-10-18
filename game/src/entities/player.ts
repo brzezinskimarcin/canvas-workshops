@@ -18,6 +18,7 @@ export default class Player extends Character {
   #HEALTH_BAR_RADIUS = 8;
   #HEALTH_BAR_STROKE = 2;
   #HEALTH_BAR_OFFSET = 24;
+  #HEALTH_BAR_COLOR = 'rgb(187, 10, 30)';
 
   constructor(args: PlayerConstructor) {
     super({
@@ -43,36 +44,6 @@ export default class Player extends Character {
   }
 
   draw() {
-    super.draw();
-
-    this.ctx.beginPath();
-    this.ctx.roundRect(
-      this.#HEALTH_BAR_OFFSET,
-      this.#HEALTH_BAR_OFFSET,
-      this.health / this.MAX_HEALTH * this.#HEALTH_BAR_WIDTH,
-      this.#HEALTH_BAR_HEIGHT,
-      this.#HEALTH_BAR_RADIUS,
-    );
-    this.ctx.closePath();
-
-    this.ctx.fillStyle = 'rgb(187, 10, 30)';
-    this.ctx.fill();
-
-    this.ctx.beginPath();
-    this.ctx.roundRect(
-      this.#HEALTH_BAR_OFFSET,
-      this.#HEALTH_BAR_OFFSET,
-      this.#HEALTH_BAR_WIDTH,
-      this.#HEALTH_BAR_HEIGHT,
-      this.#HEALTH_BAR_RADIUS,
-    );
-    this.ctx.closePath();
-
-    this.ctx.strokeStyle = 'rgb(0, 0, 0)';
-    this.ctx.lineWidth = this.#HEALTH_BAR_STROKE;
-    this.ctx.stroke();
-
-    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-    this.ctx.fill();
+    // @TODO:
   }
 }

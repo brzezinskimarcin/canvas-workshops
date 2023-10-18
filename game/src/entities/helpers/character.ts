@@ -176,64 +176,15 @@ export default abstract class Character {
   }
 
   animateWalking(framesDelayed: number, callback: () => void) {
-    if (this.walkingAnimation > -1 && (this.controls.keyLeft || this.controls.keyRight)) {
-      this.ctx.translate(this.centerX, this.centerY);
-      const direction = this.controls.keyLeft ? -1 : 1;
-      const frame = (this.walkingAnimation + framesDelayed) % this.#WALKING_ANIMATION_FRAMES;
-      this.ctx.rotate(direction * frame * Math.PI / 60);
-      this.ctx.translate(-this.centerX, -this.centerY);
-    }
-
-    callback();
-    this.ctx.resetTransform();
+    // @TODO:
   }
 
   draw() {
-    this.bodyParts.gun.rotate({
-      angle: this.angle,
-      x: this.centerX,
-      y: this.centerY,
-      callback: () => {
-        this.bodyParts.gun.draw({
-          destinationX: this.centerX,
-          destinationY: this.centerY,
-        });
-      },
-    });
-
-    this.animateWalking(5, () => {
-      this.bodyParts.foot.draw({
-        destinationX: this.centerX - this.bodyParts.foot.width / 2 - this.#FEET_OFFSET,
-        destinationY: this.y + this.#PLAYER_WIDTH - this.bodyParts.foot.height,
-      });
-    });
-
-    this.bodyParts.body.draw({
-      destinationX: this.x,
-      destinationY: this.y,
-    });
-
-    const offsetX = this.#EYES_OFFSET * Math.sin(Math.PI / 2 - this.angle);
-    const offsetY = this.#EYES_OFFSET * Math.cos(Math.PI / 2 - this.angle);
-
-    if (this.damagedAnimation) {
-      this.damagedAnimation--;
-      this.bodyParts.eyesClosed.draw({
-        destinationX: this.centerX + offsetX - this.bodyParts.eyesClosed.width / 2,
-        destinationY: this.centerY + offsetY - this.bodyParts.eyesClosed.height / 2,
-      });
-    } else {
-      this.bodyParts.eyesOpen.draw({
-        destinationX: this.centerX + offsetX - this.bodyParts.eyesOpen.width / 2,
-        destinationY: this.centerY + offsetY - this.bodyParts.eyesOpen.height / 2,
-      });
-    }
-
-    this.animateWalking(0, () => {
-      this.bodyParts.foot.draw({
-        destinationX: this.centerX - this.bodyParts.foot.width / 2 + this.#FEET_OFFSET,
-        destinationY: this.y + this.#PLAYER_WIDTH - this.bodyParts.foot.height,
-      });
-    });
+    // @TODO:
+    // gun
+    // left foot
+    // body
+    // eyes
+    // right foot
   }
 }

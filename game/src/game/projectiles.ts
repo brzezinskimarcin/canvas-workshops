@@ -38,7 +38,7 @@ export default class Projectiles {
   }
 
   draw() {
-    this.projectiles.forEach(projectile => projectile.draw());
+    // @TODO:
   }
 
   addProjectile({ x, y, angle }: AddProjectileArgs) {

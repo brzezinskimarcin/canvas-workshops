@@ -35,8 +35,8 @@ export default class EnemyControls {
   }
 
   updateControls() {
-    this.updateShoot();
-    this.updatePosition();
+    // this.updateShoot();
+    // this.updatePosition();
   }
 
   getAngle({ x, y }: Point) {
