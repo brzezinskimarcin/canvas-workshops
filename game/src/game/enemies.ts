@@ -24,6 +24,10 @@ interface EnemiesConstructor {
 }
 
 export default class Enemies {
+  #FONT_SIZE = 36;
+  #OFFSET_X = 24;
+  #OFFSET_Y = 12;
+
   ctx: CanvasRenderingContext2D;
   map: Map;
   projectiles: Projectiles;
