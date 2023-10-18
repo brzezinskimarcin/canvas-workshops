@@ -16,7 +16,7 @@ interface ProjectileConstructor {
 }
 
 export default class Projectile {
-  #PROJECTILE_VELOCITY = 12;
+  #PROJECTILE_VELOCITY = 10;
 
   ctx: CanvasRenderingContext2D;
   map: Map;
